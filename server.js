@@ -11,6 +11,11 @@ const port = 3000;
 const genAi = new GoogleGenerativeAI(process.env.API_KEY);
 
 app.use(bodyParser.json());
+// app.use(express.static('public'));
+
+app.get("/health", (req, res) => {
+    return res.status(200).send("OK");
+})
 
 app.post('/fetch-news', async (req, res) => {
     const { companyName, startDate, endDate } = req.body;
