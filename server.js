@@ -13,6 +13,10 @@ const genAi = new GoogleGenerativeAI(process.env.API_KEY);
 app.use(bodyParser.json());
 // app.use(express.static('public'));
 
+app.get("/", (req, res) => {
+    return res.status(200).send("HOMe");
+})
+
 app.get("/health", (req, res) => {
     return res.status(200).send("OK");
 })
