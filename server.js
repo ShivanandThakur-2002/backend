@@ -35,11 +35,6 @@ app.post('/fetch-news', async (req, res) => {
     }
 });
 
-// Serve index.html for the root URL
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'index.html'));
-});
-
 // Handle sending emails
 app.post('/send-email', async (req, res) => {
     const { emailAddress, newsSummary } = req.body;
