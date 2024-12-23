@@ -1,28 +1,31 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const path = require('path');
 const nodemailer = require('nodemailer');
 const { GoogleGenerativeAI } = require('@google/generative-ai');
-const cors = require('cors'); // Add CORS middleware
 require('dotenv').config();
 
 const app = express();
-const port = process.env.PORT || 3000; // Use dynamic port for deployment
 
-// Initialize Google Generative AI
+
+const port = 3000;
+
+
+///THEHRIOER
+
 const genAi = new GoogleGenerativeAI(process.env.API_KEY);
 
-// Middleware
 app.use(bodyParser.json());
-app.use(cors({ // Enable CORS for frontend integration
-    origin: 'https://cozy-flan-331cfb.netlify.app', // Replace with your actual Netlify URL
-    methods: ['GET', 'POST'],
-}));
+// app.use(express.static('public'));
 
-// Health Check Endpoint
-app.get("/", (req, res) => res.status(200).send("HOME"));
-app.get("/health", (req, res) => res.status(200).send("OK"));
+app.get("/", (req, res) => {
+    return res.status(200).send("HOMe");
+})
 
-// Fetch News Endpoint
+app.get("/health", (req, res) => {
+    return res.status(200).send("OK");
+})
+
 app.post('/fetch-news', async (req, res) => {
     const { companyName, startDate, endDate } = req.body;
     if (!companyName || !startDate || !endDate) {
@@ -41,7 +44,7 @@ app.post('/fetch-news', async (req, res) => {
     }
 });
 
-// Send Email Endpoint
+// Handle sending emails
 app.post('/send-email', async (req, res) => {
     const { emailAddress, newsSummary } = req.body;
     if (!emailAddress || !newsSummary) {
@@ -58,7 +61,9 @@ app.post('/send-email', async (req, res) => {
             pass: process.env.EMAIL_PASS,
         },
     });
+    
 
+    // Configure the email options
     const mailOptions = {
         from: process.env.EMAIL_USER,
         to: emailAddress,
@@ -67,6 +72,7 @@ app.post('/send-email', async (req, res) => {
     };
 
     try {
+        // Send the email
         await transporter.sendMail(mailOptions);
         res.status(200).json({ message: 'Email sent successfully.' });
     } catch (error) {
@@ -75,9 +81,10 @@ app.post('/send-email', async (req, res) => {
     }
 });
 
-// Start the Server
 app.listen(port, () => {
     console.log(`Server running at http://localhost:${port}`);
 });
 
 module.exports = app;
+
+accoring to thsi code of the server give me the changes 
