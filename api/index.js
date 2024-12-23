@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
 const nodemailer = require('nodemailer');
-// const cors = require('cors');
+const cors = require('cors');
 const { GoogleGenerativeAI } = require('@google/generative-ai');
 require('dotenv').config();
 
@@ -12,11 +12,16 @@ const port = 3000;
 
 
 // /THEHRIOER
-const cors = require('cors');
-app.use(cors({
-    origin: 'https://storied-banoffee-f0f725.netlify.app/', // Replace with your Netlify frontend URL
-    methods: ['GET', 'POST'],
-}));
+const corsOpts = {
+    origin: '*',
+  
+    methods: [
+      'GET',
+      'POST',
+    ],
+};
+
+app.use(cors(corsOpts));
 
 
 const genAi = new GoogleGenerativeAI(process.env.API_KEY);
