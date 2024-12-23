@@ -12,6 +12,20 @@ const port = 3000;
 
 
 ///THEHRIOER
+const corsOpts = {
+    origin: '*',
+  
+    methods: [
+      'GET',
+      'POST',
+    ],
+  
+    allowedHeaders: [
+      'Content-Type',
+    ],
+  };
+  
+  app.use(cors(corsOpts));
 
 const genAi = new GoogleGenerativeAI(process.env.API_KEY);
 
@@ -87,4 +101,3 @@ app.listen(port, () => {
 
 module.exports = app;
 
-accoring to thsi code of the server give me the changes 
