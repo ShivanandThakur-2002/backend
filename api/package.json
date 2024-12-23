@@ -7,7 +7,7 @@
     "start": "node index.js",
     "server": "node index.js"
   },
-  "dependencieS": {
+  "corsdependencieS": {
     "cors": "^2.8.5"
   },
   "dependencies": {
