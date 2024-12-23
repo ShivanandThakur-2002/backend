@@ -29,8 +29,6 @@ const port = 3000;
 const genAi = new GoogleGenerativeAI(process.env.API_KEY);
 
 // app.use(express.static('public'));
-app.get('/favicon.ico', (req, res) => res.status(204));
-
 
 app.get("/", (req, res) => {
     return res.status(200).send("The server started");
@@ -38,6 +36,10 @@ app.get("/", (req, res) => {
 
 app.get("/health", (req, res) => {
     return res.status(200).send("OK");
+})
+
+app.get('/favicon.ico', (req, res) => {
+    res.status(204);
 })
 
 app.post('/fetch-news', async (req, res) => {
