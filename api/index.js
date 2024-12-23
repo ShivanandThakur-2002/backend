@@ -2,34 +2,37 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
 const nodemailer = require('nodemailer');
+const cors = require('cors'); // Import cors
 const { GoogleGenerativeAI } = require('@google/generative-ai');
 require('dotenv').config();
 
 const app = express();
-
-
 const port = 3000;
+
+app.use(cors());
+
+app.use(bodyParser.json());
 
 
 ///THEHRIOER
-const corsOpts = {
-    origin: '*',
+// const corsOpts = {
+//     origin: '*',
   
-    methods: [
-      'GET',
-      'POST',
-    ],
+//     methods: [
+//       'GET',
+//       'POST',
+//     ],
   
-    allowedHeaders: [
-      'Content-Type',
-    ],
-  };
+//     allowedHeaders: [
+//       'Content-Type',
+//     ],
+//   };
   
-  app.use(cors(corsOpts));
+//   app.use(cors(corsOpts));
 
 const genAi = new GoogleGenerativeAI(process.env.API_KEY);
 
-app.use(bodyParser.json());
+// app.use(bodyParser.json());
 // app.use(express.static('public'));
 
 app.get("/", (req, res) => {
@@ -101,3 +104,4 @@ app.listen(port, () => {
 
 module.exports = app;
 
+coomu
