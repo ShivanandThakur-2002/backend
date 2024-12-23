@@ -8,7 +8,7 @@
     "server": "node index.js"
   },
 
-  "corsdependencies": {
+  "dependencieS": {
     "cors": "^2.8.5"
   }, 
 
