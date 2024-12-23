@@ -12,16 +12,16 @@ const port = 3000;
 
 
 // /THEHRIOER
-const corsOpts = {
-    origin: 'https://storied-banoffee-f0f725.netlify.app/',
+// const corsOpts = {
+//     origin: 'https://storied-banoffee-f0f725.netlify.app/',
   
-    methods: [
-      'GET',
-      'POST',
-    ],
-};
+//     methods: [
+//       'GET',
+//       'POST',
+//     ],
+// };
 
-app.use(cors(corsOpts));
+// app.use(cors(corsOpts));
 
 
 const genAi = new GoogleGenerativeAI(process.env.API_KEY);
