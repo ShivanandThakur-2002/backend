@@ -2,10 +2,11 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
 const nodemailer = require('nodemailer');
-// const cors = require('cors');
+const cors = require('cors');
 const { GoogleGenerativeAI } = require('@google/generative-ai');
 require('dotenv').config();
 
+app.use(cors());
 
 const app = express();
 const port = 3000;
@@ -21,7 +22,7 @@ const port = 3000;
 //     ],
 // };
 
-// app.use(cors(corsOpts));
+// 
 
 
 const genAi = new GoogleGenerativeAI(process.env.API_KEY);
