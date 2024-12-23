@@ -13,7 +13,7 @@ const port = 3000;
 
 // /THEHRIOER
 const corsOpts = {
-    origin: '*',
+    origin: 'https://storied-banoffee-f0f725.netlify.app/',
   
     methods: [
       'GET',
