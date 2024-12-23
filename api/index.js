@@ -6,7 +6,7 @@ const nodemailer = require('nodemailer');
 const { GoogleGenerativeAI } = require('@google/generative-ai');
 require('dotenv').config();
 
-app.use(cors());
+// app.use(cors());
 
 const app = express();
 const port = 3000;
