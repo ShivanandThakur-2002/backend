@@ -6,30 +6,40 @@ const cors = require('cors');
 const { GoogleGenerativeAI } = require('@google/generative-ai');
 require('dotenv').config();
 
-const app = express();
 
-// CORS configuration
+const app = express();
+const port = 3000;
+
+
+// /THEHRIOER
 const corsOpts = {
-    origin: 'https://storied-banoffee-f0f725.netlify.app', // Replace with your frontend URL
-    methods: ['GET', 'POST'],
+    origin: 'https://storied-banoffee-f0f725.netlify.app/',
+  
+    methods: [
+      'GET',
+      'POST',
+    ],
 };
 
 app.use(cors(corsOpts));
-app.use(bodyParser.json());
+
 
 const genAi = new GoogleGenerativeAI(process.env.API_KEY);
 
-// Health check endpoint
-app.get('/health', (req, res) => {
-    res.status(200).send('OK');
-});
+// app.use(express.static('public'));
 
-// Favicon handler
+app.get("/", (req, res) => {
+    return res.status(200).send("The server started");
+})
+
+app.get("/health", (req, res) => {
+    return res.status(200).send("OK");
+})
+
 app.get('/favicon.ico', (req, res) => {
-    res.status(204).send();
-});
+    res.status(204);
+})
 
-// Fetch news endpoint
 app.post('/fetch-news', async (req, res) => {
     const { companyName, startDate, endDate } = req.body;
     if (!companyName || !startDate || !endDate) {
@@ -48,15 +58,16 @@ app.post('/fetch-news', async (req, res) => {
     }
 });
 
-// Send email endpoint
+// Handle sending emails
 app.post('/send-email', async (req, res) => {
     const { emailAddress, newsSummary } = req.body;
     if (!emailAddress || !newsSummary) {
         return res.status(400).json({ error: 'Email address and news summary are required.' });
     }
 
+    // Configure the email transporter
     const transporter = nodemailer.createTransport({
-        host: 'smtp.gmail.com',
+        host: "smtp.gmail.com",
         port: 465,
         secure: true, // Use SSL
         auth: {
@@ -64,7 +75,9 @@ app.post('/send-email', async (req, res) => {
             pass: process.env.EMAIL_PASS,
         },
     });
+    
 
+    // Configure the email options
     const mailOptions = {
         from: process.env.EMAIL_USER,
         to: emailAddress,
@@ -73,6 +86,7 @@ app.post('/send-email', async (req, res) => {
     };
 
     try {
+        // Send the email
         await transporter.sendMail(mailOptions);
         res.status(200).json({ message: 'Email sent successfully.' });
     } catch (error) {
@@ -81,5 +95,8 @@ app.post('/send-email', async (req, res) => {
     }
 });
 
-// Export the app for serverless function
+app.listen(port, () => {
+    console.log(`Server running at http://localhost:${port}`);
+});
+
 module.exports = app;
