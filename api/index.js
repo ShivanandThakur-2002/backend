@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
 const nodemailer = require('nodemailer');
-const cors = require('cors');
+// const cors = require('cors');
 const { GoogleGenerativeAI } = require('@google/generative-ai');
 require('dotenv').config();
 
