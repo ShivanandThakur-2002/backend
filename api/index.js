@@ -2,13 +2,13 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
 const nodemailer = require('nodemailer');
-const cors = require('cors');
+// const cors = require('cors');
 const { GoogleGenerativeAI } = require('@google/generative-ai');
 require('dotenv').config();
 
-app.use(cors({
-    origin: "https://statuesque-pasca-aef2dc.netlify.app/"
-}));
+// app.use(cors({
+//     origin: "https://statuesque-pasca-aef2dc.netlify.app/"
+// }));
 
 const app = express();
 const port = 3000;
