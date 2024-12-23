@@ -6,6 +6,11 @@ const cors = require('cors'); // Import cors
 const { GoogleGenerativeAI } = require('@google/generative-ai');
 require('dotenv').config();
 
+if (!process.env.API_KEY || !process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
+    console.error("Missing required environment variables");
+    process.exit(1); // Stop the server if configuration is incomplete
+}
+
 const app = express();
 const port = 3000;
 
@@ -34,6 +39,8 @@ const genAi = new GoogleGenerativeAI(process.env.API_KEY);
 
 // app.use(bodyParser.json());
 // app.use(express.static('public'));
+app.get('/favicon.ico', (req, res) => res.status(204));
+
 
 app.get("/", (req, res) => {
     return res.status(200).send("HOMe");
@@ -103,5 +110,3 @@ app.listen(port, () => {
 });
 
 module.exports = app;
-
-coomu
