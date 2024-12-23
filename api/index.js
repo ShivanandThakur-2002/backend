@@ -10,7 +10,7 @@ const app = express();
 const port = 3000;
 
 
-///THEHRIOER
+// /THEHRIOER
 // const corsOpts = {
 //     origin: '*',git
   
@@ -24,7 +24,7 @@ const port = 3000;
 //     ],
 //   };
   
-  app.use(cors(corsOpts));
+//   app.use(cors(corsOpts));
 
 const genAi = new GoogleGenerativeAI(process.env.API_KEY);
 
@@ -38,9 +38,9 @@ app.get("/health", (req, res) => {
     return res.status(200).send("OK");
 })
 
-// app.get('/favicon.ico', (req, res) => {
-//     res.status(204);
-// })
+app.get('/favicon.ico', (req, res) => {
+    res.status(204);
+})
 
 app.post('/fetch-news', async (req, res) => {
     const { companyName, startDate, endDate } = req.body;
