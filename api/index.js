@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
 const nodemailer = require('nodemailer');
-// const cors = require('cors'); // Import cors
+const cors = require('cors'); // Import cors
 const { GoogleGenerativeAI } = require('@google/generative-ai');
 require('dotenv').config();
 
@@ -13,7 +13,7 @@ const port = 3000;
 
 ///THEHRIOER
 // const corsOpts = {
-//     origin: '*',
+//     origin: '*',git
   
 //     methods: [
 //       'GET',
