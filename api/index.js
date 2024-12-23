@@ -11,20 +11,12 @@ const port = 3000;
 
 
 // /THEHRIOER
-// const corsOpts = {
-//     origin: '*',git
-  
-//     methods: [
-//       'GET',
-//       'POST',
-//     ],
-  
-//     allowedHeaders: [
-//       'Content-Type',
-//     ],
-//   };
-  
-//   app.use(cors(corsOpts));
+const cors = require('cors');
+app.use(cors({
+    origin: 'https://storied-banoffee-f0f725.netlify.app/', // Replace with your Netlify frontend URL
+    methods: ['GET', 'POST'],
+}));
+
 
 const genAi = new GoogleGenerativeAI(process.env.API_KEY);
 
