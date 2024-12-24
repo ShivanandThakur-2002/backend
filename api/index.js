@@ -29,7 +29,7 @@ const allowCors = fn => async (req, res) => {
 const app = express();
 const port = 3000;
 app.use(cors({
-    origin: "https://statuesque-pasca-aef2dc.netlify.app/"
+    origin: "*"
 }));
 
 // /THEHRIOER
