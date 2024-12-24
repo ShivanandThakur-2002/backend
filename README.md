@@ -46,42 +46,51 @@ npm start
 ## Endpoints
 **GET** ```/```
   - Returns a simple message confirming the server is running.
+
 **GET** ```/health```
   - Returns OK to verify the health of the server.
+
 **POST** ```/fetch-news```
   - Request Body:
+```
   json
 {
   "companyName": "Company Name",
   "startDate": "YYYY-MM-DD",
   "endDate": "YYYY-MM-DD"
 }
-Response:
-200 OK: Returns news summary in JSON format.
-400 Bad Request: If required fields are missing.
-500 Internal Server Error: If an error occurs during news generation.
-POST /send-email
-Request Body:
-json
-Copy code
-{
-  "emailAddress": "recipient@example.com",
-  "newsSummary": "Summary of the news"
-}
-Response:
-200 OK: Email sent successfully.
-400 Bad Request: If required fields are missing.
-500 Internal Server Error: If an error occurs during email sending.
-Deployment
-Vercel
-Configure your vercel.json file:
+```
+  - Response:
+    - 200 OK: Returns news summary in JSON format.
+    - 400 Bad Request: If required fields are missing.
+    - 500 Internal Server Error: If an error occurs during news generation.
 
-json
-Copy code
-{
+**POST** ```/send-email```
+  - Request Body:
+    ```
+      json
+      {
+        "emailAddress": "recipient@example.com",
+        "newsSummary": "Summary of the news"
+      }
+    ```
+    
+**Response:***
+
+  - 200 OK: Email sent successfully.
+  - 400 Bad Request: If required fields are missing.
+  - 500 Internal Server Error: If an error occurs during email sending.
+
+## Deployment
+
+**Vercel**
+1. Configure your vercel.json file:
+```
+  json
+  {
   "version": 2,
   "rewrites": [
-    { "source": "/(.*)", "destination": "/api" }
+  { "source": "/(.*)", "destination": "/api" }
   ],
   "headers": [
     {
@@ -95,25 +104,28 @@ Copy code
     }
   ]
 }
-Deploy the project on Vercel.
+```
 
-Technologies Used
-Node.js: Backend framework
-Express.js: Server framework
-Nodemailer: Email handling
-Google Generative AI: News generation
-dotenv: Environment variable management
-CORS: Cross-origin resource sharing
-Troubleshooting
-500 Errors
+2. Deploy the project on Vercel.
 
-Check API key, email credentials, and environment variables.
-Ensure proper configurations in vercel.json for deployed environments.
-404 Errors
+## Technologies Used
+  - Node.js: Backend framework
+  - Express.js: Server framework
+  - Nodemailer: Email handling
+  - Google Generative AI: News generation
+  - dotenv: Environment variable management
+  - CORS: Cross-origin resource sharing
 
-Verify the API route structure and ensure correct deployment on Vercel.
-CORS Issues
+## Troubleshooting
+1. **500 Errors**
+  - Check API key, email credentials, and environment variables.
+  - Ensure proper configurations in vercel.json for deployed environments.
 
-Ensure the appropriate headers are set in both the server and vercel.json.
-License
+2. **404 Errors**
+  - Verify the API route structure and ensure correct deployment on Vercel.
+
+3. **CORS Issues**
+  - Ensure the appropriate headers are set in both the server and vercel.json.
+
+## License
 This project is licensed under the MIT License.
