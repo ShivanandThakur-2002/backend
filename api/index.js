@@ -7,14 +7,30 @@ const { GoogleGenerativeAI } = require('@google/generative-ai');
 require('dotenv').config();
 
 
+const allowCors = fn => async (req, res) => {
+    res.setHeader('Access-Control-Allow-Credentials', true)
+    res.setHeader('Access-Control-Allow-Origin', '*')
+    // another common pattern
+    // res.setHeader('Access-Control-Allow-Origin', req.headers.origin);
+    res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,PATCH,DELETE,POST,PUT')
+    res.setHeader(
+      'Access-Control-Allow-Headers',
+      'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version'
+    )
+    if (req.method === 'OPTIONS') {
+      res.status(200).end()
+      return
+    }
+    return await fn(req, res)
+  }
+  
+
 
 const app = express();
 const port = 3000;
 app.use(cors({
-    origin: "*"
-}
-
-));
+    origin: "https://statuesque-pasca-aef2dc.netlify.app/"
+}));
 
 // /THEHRIOER
 // const corsOpts = {
@@ -104,4 +120,4 @@ app.listen(port, () => {
     console.log(`Server running at http://localhost:${port}`);
 });
 
-module.exports = app;
+module.exports = allowCors(app);
