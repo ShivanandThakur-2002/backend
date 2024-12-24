@@ -25,24 +25,11 @@ const allowCors = fn => async (req, res) => {
   }
   
 
-
 const app = express();
 const port = 3000;
 app.use(cors({
     origin: "*"
 }));
-
-// /THEHRIOER
-// const corsOpts = {
-//     origin: 'https://storied-banoffee-f0f725.netlify.app/',
-  
-//     methods: [
-//       'GET',
-//       'POST',
-//     ],
-// };
-
-// 
 
 
 const genAi = new GoogleGenerativeAI(process.env.API_KEY);
@@ -92,8 +79,8 @@ app.post('/send-email', async (req, res) => {
         port: 465,
         secure: true, // Use SSL
         auth: {
-            user: process.env.EMAIL_USER,
-            pass: process.env.EMAIL_PASS,
+            user: "shivanandthakur2002@gmail.com",
+            pass: "cwgqtefbnzqghlqy",
         },
     });
     
