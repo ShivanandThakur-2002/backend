@@ -79,8 +79,8 @@ app.post('/send-email', async (req, res) => {
         port: 465,
         secure: true, // Use SSL
         auth: {
-            user: "shivanandthakur2002@gmail.com",
-            pass: "cwgqtefbnzqghlqy",
+            user: "user@gmail.com",
+            pass: "userpassword",
         },
     });
     
