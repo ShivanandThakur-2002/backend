@@ -37,7 +37,6 @@ app.get('/health', (req, res) => {
 });
 
 app.post('/fetch-news', async (req, res) => {
-    console.log("Incoming request body:", req.body);
     const { companyName, startDate, endDate } = req.body;
     if (!companyName || !startDate || !endDate) {
         return res.status(400).json({ error: 'All fields are required.' });
