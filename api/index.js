@@ -26,7 +26,7 @@ const port = 3000;
 app.use(cors({ origin: '*' }));
 app.use(bodyParser.json()); // Middleware to parse JSON requests
 
-const genAi = new GoogleGenerativeAI(process.env.AIzaSyCjDT18bbF7sM3iX69Uw7Ai9BVbM-IdS7M);
+const genAi = new GoogleGenerativeAI(process.env.API_KEY);
 
 app.get('/', (req, res) => {
     res.status(200).send('The server started');
