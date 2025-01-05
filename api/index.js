@@ -20,7 +20,7 @@ const allowCors = fn => async (req, res) => {
     return await fn(req, res);
 };
 
-// const app = express();
+const app = express();
 const port = 3000;
 
 // Middleware
