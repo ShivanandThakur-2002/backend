@@ -25,7 +25,7 @@ const port = 3000;
 
 // Middleware
 app.use(cors({ 
-    origin: 'https://beamish-custard-115947.netlify.app' 
+    origin: '*' 
 }));
 
 app.use(bodyParser.json());
