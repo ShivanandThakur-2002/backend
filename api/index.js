@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const nodemailer = require('nodemailer');
 const cors = require('cors');
-const { GoogleGenerativeAI } = require('@google/generative-ai');
+const axios = require('axios');
 require('dotenv').config();
 
 const allowCors = fn => async (req, res) => {
@@ -24,16 +24,12 @@ const app = express();
 const port = 3000;
 
 // Middleware
-app.use(cors({ 
-    origin: '*' 
+app.use(cors({
+    origin: '*'
 }));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-
-// Initialize GoogleGenerativeAI
-const genAi = new GoogleGenerativeAI(process.env.API_KEY);
-console.log('GoogleGenerativeAI Initialized:', Boolean(process.env.API_KEY));
 
 // Health check
 app.get('/', (req, res) => res.status(200).send('The server started'));
@@ -51,24 +47,31 @@ app.post('/fetch-news', async (req, res) => {
     try {
         console.log('Fetching news for:', { companyName, startDate, endDate });
 
-        const model = genAi.getGenerativeModel({ model: 'gemini-pro' });
         const prompt = `
             Provide controversy news about ${companyName} from ${startDate} to ${endDate}.
             Include links to the news sources, prioritizing authentic websites. 
             Rank them by authenticity score (higher score = more authentic).
         `;
 
-        const result = await model.generateContent(prompt);
-        const response = result.response;
+        const response = await axios.post(
+            'https://api.openai.com/v1/chat/completions',
+            {
+                model: "gpt-3.5-turbo",
+                messages: [{ role: "user", content: prompt }],
+                temperature: 0.7
+            },
+            {
+                headers: {
+                    'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`,
+                    'Content-Type': 'application/json'
+                }
+            }
+        );
 
-        if (!response || !response.text) {
-            throw new Error('Invalid response from the generative model');
-        }
-
-        const newsContent = response.text();
+        const content = response.data.choices[0].message.content;
 
         // Parse and prioritize news items
-        const newsItems = parseNewsResponse(newsContent);
+        const newsItems = parseNewsResponse(content);
         res.json({ news: newsItems });
     } catch (error) {
         console.error('Error in /fetch-news:', error.message || error);
